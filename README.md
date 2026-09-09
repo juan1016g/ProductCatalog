@@ -21,6 +21,23 @@ La aplicación se encuentra desplegada y la documentación interactiva de la API
 
 ---
 
+## 🏗 Estructura del Proyecto (Clean Architecture)
+
+El proyecto sigue una estricta separación de responsabilidades a través de las siguientes capas:
+
+```text
+ProductCatalog/
+│
+├── Domain/                   # Entidades del núcleo (Product, AuditableEntity), Excepciones y Contratos.
+├── Application/              # Casos de uso (CQRS con MediatR), DTOs, Validaciones y Comportamientos.
+├── Infrastructure/           # Implementación de Repositorios, DbContext de EF Core y acceso a BD.
+├── Delamujer.ProductCatalog/ # Proyecto API principal: Controladores, Middleware y Swagger.
+│
+├── Domain.Tests/             # Pruebas unitarias de las reglas de negocio en las entidades (xUnit).
+└── Application.Tests/        # Pruebas unitarias para Handlers y Validadores utilizando Moq.
+```
+**Flujo de Dependencias:** `Delamujer.ProductCatalog(WebAPI)` -> `Infrastructure` -> `Application` -> `Domain`
+
 ## 📋 Endpoints y Reglas de Negocio
 
 La API expone los siguientes contratos HTTP, garantizando la consistencia del dominio:
