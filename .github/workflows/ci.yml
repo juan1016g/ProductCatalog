@@ -27,4 +27,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release
       env:
-        SQL_CONNECTION_STRING: ${{ secrets.SQL_CONNECTION_STRING }}
+        SQL_CONNECTION_STRING: ${{ secrets.SQL_CONNECTION_STRING }} 
