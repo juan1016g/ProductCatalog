@@ -7,12 +7,17 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
 # Esta fase se usa para compilar el proyecto de servicio
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
+# Copiar todos los archivos de proyecto para que el restore encuentre las referencias de Clean Architecture
 COPY ["Delamujer.ProductCatalog/Delamujer.ProductCatalog.csproj", "Delamujer.ProductCatalog/"]
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+
 RUN dotnet restore "./Delamujer.ProductCatalog/Delamujer.ProductCatalog.csproj"
 COPY . .
 WORKDIR "/src/Delamujer.ProductCatalog"
