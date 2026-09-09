@@ -22,7 +22,7 @@ namespace Application.UseCases.Products.Commands.UpdateStock
             // 2. Ejecutar la regla de negocio del núcleo (Lanza InvalidStockException si queda en negativo)
             product.UpdateStock(request.Quantity);
 
-            // 3. Persistir el cambio atómicamente [RF-04]
+            // 3. Persistir el cambio atómicamente
             await _productRepository.UpdateAsync(product);
 
             // 4. Retornar el nuevo stock para la confirmación HTTP 200

@@ -1,5 +1,7 @@
 ﻿using Application.DTOs;
 using Application.UseCases.Products.Commands.CreateProduct;
+using Application.UseCases.Products.Commands.DeleteProduct;
+using Application.UseCases.Products.Commands.UpdateProduct;
 using Application.UseCases.Products.Commands.UpdateStock;
 using Application.UseCases.Products.Queries.GetPagedProducts;
 using Application.UseCases.Products.Queries.GetProductById;
@@ -129,5 +131,51 @@ namespace Delamujer.ProductCatalog.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = command.ProductId }, result);
         }
+
+        /// <summary>
+        /// Actualiza la información general de un producto existente.
+        /// </summary>
+        /// <param name="id">El identificador único del producto.</param>
+        /// <param name="command">Los nuevos datos del producto.</param>
+        /// <response code="200">El producto fue actualizado correctamente.</response>
+        /// <response code="400">Si los datos de entrada son inválidos.</response>
+        /// <response code="404">Si el producto no existe.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        [HttpPut("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ProductDto>> Update(Guid id, [FromBody] UpdateProductCommand command)
+        {
+            if (id != command.Id)
+                command.Id = id;
+
+            await _mediator.Send(command);
+ 
+            var result = await _mediator.Send(new GetProductByIdQuery(id));
+
+            return Ok(result);
+
+        }
+
+        /// <summary>
+        /// Elimina un producto del catálogo de forma permanente.
+        /// </summary>
+        /// <param name="id">El identificador único del producto a eliminar.</param>
+        /// <response code="204">El producto fue eliminado correctamente.</response>
+        /// <response code="404">Si el producto no existe.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteProductCommand { Id = id });
+            return NoContent();
+        }
+
+
     }
 }

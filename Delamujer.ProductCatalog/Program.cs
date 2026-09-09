@@ -3,6 +3,7 @@ using Delamujer.ProductCatalog.Middlewares;
 using Infrastructure;
 using Microsoft.OpenApi;
 using System.Reflection;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 

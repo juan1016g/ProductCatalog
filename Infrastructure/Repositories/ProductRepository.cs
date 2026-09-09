@@ -50,5 +50,17 @@ namespace Infrastructure.Repositories
         {
             return !await _dbContext.Products.AnyAsync(p => p.Name == name);
         }
+
+        public async Task<Product?> GetByNameAsync(string name)
+        {
+            return await _dbContext.Products.FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
+        }
+
+        public async Task DeleteAsync(Product product)
+        {
+            _dbContext.Products.Remove(product);
+            await _dbContext.SaveChangesAsync();
+        }
+
     }
 }

@@ -32,6 +32,13 @@ namespace Domain.Entities
             Stock = initialStock;
         }
 
+        public void UpdateInformation(string name, string? description, decimal price)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+        }
+
         public void UpdateStock(int quantity)
         {
             int newStock = Stock + quantity;

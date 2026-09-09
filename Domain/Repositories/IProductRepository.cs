@@ -10,5 +10,7 @@ namespace Domain.Repositories
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task<bool> IsNameUniqueAsync(string name);
+        Task<Product?> GetByNameAsync(string name);
+        Task DeleteAsync(Product product);
     }
 }
