@@ -12,7 +12,6 @@ namespace Domain.Entities
 
         private Product() {
             Name = null!;
-            //Description = null!;
         }
 
         public Product(string name, decimal price, int initialStock, string? description = null)

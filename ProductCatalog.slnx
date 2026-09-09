@@ -2,8 +2,10 @@
   <Folder Name="/Elementos de la solución/">
     <File Path=".github/workflows/ci.yml" />
   </Folder>
+  <Project Path="Application.Tests/Application.Tests.csproj" />
   <Project Path="Application/Application.csproj" />
   <Project Path="Delamujer.ProductCatalog/Delamujer.ProductCatalog.csproj" />
+  <Project Path="Domain.Tests/Domain.Tests.csproj" />
   <Project Path="Domain/Domain.csproj" />
   <Project Path="Infrastructure/Infrastructure.csproj" />
 </Solution>

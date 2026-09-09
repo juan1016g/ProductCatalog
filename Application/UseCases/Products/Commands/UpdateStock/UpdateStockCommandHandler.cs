@@ -19,7 +19,7 @@ namespace Application.UseCases.Products.Commands.UpdateStock
             var product = await _productRepository.GetByIdAsync(request.ProductId) 
                 ?? throw new KeyNotFoundException($"No se encontró un producto con el ID {request.ProductId}");
 
-            // 2. Ejecutar la regla de negocio del núcleo (Lanza InvalidStockException si queda en negativo) [RN-01]
+            // 2. Ejecutar la regla de negocio del núcleo (Lanza InvalidStockException si queda en negativo)
             product.UpdateStock(request.Quantity);
 
             // 3. Persistir el cambio atómicamente [RF-04]
