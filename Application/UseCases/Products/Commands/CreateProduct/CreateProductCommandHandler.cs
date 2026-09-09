@@ -17,14 +17,17 @@ namespace Application.UseCases.Products.Commands
 
         public async Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+            // 1. Instanciar la entidad del dominio (ejecuta las validaciones del constructor)
             var product = new Product(
                 request.Name,
                 request.Price,
                 request.InitialStock,
                 request.Description);
 
+            // 2. Persistir utilizando el contrato de Infraestructura
             await _productRepository.AddAsync(product);
 
+            // 3. Mapear y retornar la respuesta estructurada
             return new ProductDto
             {
                 Id = product.Id,
