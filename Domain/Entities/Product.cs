@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Product
+    public class Product : AuditableEntity
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }

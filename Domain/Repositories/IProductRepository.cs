@@ -9,5 +9,6 @@ namespace Domain.Repositories
         Task<int> GetTotalCountAsync();
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
+        Task<bool> IsNameUniqueAsync(string name);
     }
 }
