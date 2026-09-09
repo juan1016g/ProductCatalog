@@ -47,8 +47,10 @@ La API expone los siguientes contratos HTTP, garantizando la consistencia del do
 | Método | Endpoint | Descripción y Reglas de Negocio |
 | :--- | :--- | :--- |
 | **POST** | `/api/products` | Crea un producto nuevo. Requiere `name`, `description`, `price` (mayor a 0) e `initialStock` (no negativo). |
-| **GET** | `/api/products/{id}` | Consulta el detalle completo de un producto específico mediante su identificador único (GUID). |
 | **GET** | `/api/products` | Consulta el catálogo completo. Implementa **paginación desde el servidor** (`pageNumber`, `pageSize`) para optimizar la transferencia de datos. |
+| **GET** | `/api/products/{id}` | Consulta el detalle completo de un producto específico mediante su identificador único (GUID). |
+| **PUT** | `/api/products/{id}` | Actualiza la información general de un producto. Valida que el precio sea mayor a 0 y que el nombre no pertenezca a otro registro. |
+| **DELETE** | `/api/products/{id}` | Elimina un producto de forma permanente. Retorna `HTTP 404 Not Found` si el identificador no existe. |
 | **PATCH** | `/api/products/{id}/stock` | Ajusta el inventario (suma o resta). Retorna `HTTP 400 Bad Request` si la operación intenta dejar el stock en un número negativo. |
 
 ---
