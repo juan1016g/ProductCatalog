@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Application/Application.csproj" />
   <Project Path="Delamujer.ProductCatalog/Delamujer.ProductCatalog.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Infrastructure/Infrastructure.csproj" />
 </Solution>
