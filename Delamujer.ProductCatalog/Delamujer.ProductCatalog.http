@@ -1,6 +1,38 @@
-@Delamujer.ProductCatalog_HostAddress = http://localhost:5231
+@HostAddress = https://localhost:7266
 
-GET {{Delamujer.ProductCatalog_HostAddress}}/weatherforecast/
+### Crear un nuevo producto
+POST {{HostAddress}}/api/products
+Content-Type: application/json
+{
+  "name": "Computador Portátil",
+  "description": "Equipo para gestión administrativa.",
+  "price": 1500000.00,
+  "initialStock": 10
+}
+
+### Obtener lista paginada de productos
+GET {{HostAddress}}/api/products?page=1&pageSize=10
 Accept: application/json
 
-###
+### Obtener un producto específico
+@ProductId = 5f42f039-e175-4296-8657-0e0b3bb3b8d7
+
+GET {{HostAddress}}/api/products/{{ProductId}}
+Accept: application/json
+
+### Actualizar el stock de un producto (Sumar o restar)
+PATCH {{HostAddress}}/api/products/{{ProductId}}/stock
+Content-Type: application/json
+{
+  "quantity": 5
+}
+
+### Probar middleware de excepciones (Debe retornar 400 Bad Request)
+POST {{HostAddress}}/api/products
+Content-Type: application/json
+{
+  "name": "",
+  "description": "Producto con errores intencionales para probar FluentValidation",
+  "price": -500,
+  "initialStock": -5
+}
