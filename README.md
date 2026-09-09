@@ -38,6 +38,8 @@ ProductCatalog/
 ```
 **Flujo de Dependencias:** `Delamujer.ProductCatalog(WebAPI)` -> `Infrastructure` -> `Application` -> `Domain`
 
+---
+
 ## 📋 Endpoints y Reglas de Negocio
 
 La API expone los siguientes contratos HTTP, garantizando la consistencia del dominio:
