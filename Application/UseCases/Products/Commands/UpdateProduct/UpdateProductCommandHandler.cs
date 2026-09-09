@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.UseCases.Products.Commands.UpdateProduct
 {
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Unit>
     {
         private readonly IProductRepository _productRepository;
 
@@ -13,7 +13,7 @@ namespace Application.UseCases.Products.Commands.UpdateProduct
             _productRepository = productRepository;
         }
 
-        public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             // 1. Obtener el producto desde el repositorio de infraestructura
             var product = await _productRepository.GetByIdAsync(request.Id)
@@ -25,6 +25,7 @@ namespace Application.UseCases.Products.Commands.UpdateProduct
             // 3. Persistir los cambios
             await _productRepository.UpdateAsync(product);
 
+            return Unit.Value;
         }
     }
 }

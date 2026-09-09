@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using MediatR;
+﻿using MediatR;
 using System.Text.Json.Serialization;
 
 namespace Application.UseCases.Products.Commands.UpdateProduct
@@ -7,7 +6,7 @@ namespace Application.UseCases.Products.Commands.UpdateProduct
     /// <summary>
     /// Comando para actualizar la información general de un producto.
     /// </summary>
-    public class UpdateProductCommand : IRequest
+    public class UpdateProductCommand : IRequest<Unit>
     {
         /// <summary>
         /// El identificador único (GUID) del producto a actualizar.
